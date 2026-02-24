@@ -1,0 +1,13 @@
+# dependencies
+node_modules
+
+# env secrets
+.env
+
+# Expo
+.expo
+dist
+web-build
+
+# Mac
+.DS_Store

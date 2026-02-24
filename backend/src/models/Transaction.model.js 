@@ -1,0 +1,32 @@
+// src/models/Transaction.model.js
+// Optional: a receipt-style record for completed payments.
+// In a prototype, you can also just list PaymentIntents as transactions.
+// Add this only if you want a more "payments-realistic" separation.
+
+import mongoose from 'mongoose';
+
+const TransactionSchema = new mongoose.Schema(
+  {
+    merchantId: { type: String, required: true, index: true },
+
+    // 1:1 relationship to PaymentIntent (one intent results in one transaction)
+    paymentIntentId: { type: mongoose.Schema.Types.ObjectId, required: true, unique: true, index: true },
+
+    amount: { type: Number, required: true, min: 1 },
+    currency: { type: String, required: true },
+
+    method: { type: String, enum: ['CARD', 'QR'], required: true },
+
+    // Transaction status can be simplified for prototype
+    status: { type: String, enum: ['SUCCEEDED', 'FAILED'], required: true },
+
+    // Optional fields that look "POS real"
+    receiptNumber: { type: String },
+    completedAt: { type: Date, required: true }
+  },
+  { timestamps: true }
+);
+
+TransactionSchema.index({ merchantId: 1, createdAt: -1 });
+
+export const Transaction = mongoose.model('Transaction', TransactionSchema);
