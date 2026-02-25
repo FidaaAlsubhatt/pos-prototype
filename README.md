@@ -161,7 +161,7 @@ Example:
 - `EXPO_PUBLIC_API_URL=http://192.168.0.100:4000`
 - `BASE_URL=http://192.168.0.100:4000`
 
-## How the Prototype Flow Works (Demo Script)
+## How the Prototype Flow Works
 
 ### QR payment demo
 1. Open app -> tap `New Payment`
